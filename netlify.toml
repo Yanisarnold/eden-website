@@ -1,0 +1,4 @@
+[build.environment]
+  # Sanity project IDs and dataset names are public identifiers used by the
+  # browser client and embedded Studio. Keep scanning enabled for other values.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SANITY_PROJECT_ID,NEXT_PUBLIC_SANITY_DATASET"
