@@ -6,4 +6,4 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   types: [blockContentType, categoryType,location],
 }
 
-// fixwd
+// fixd
