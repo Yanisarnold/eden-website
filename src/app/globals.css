@@ -1,0 +1,287 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/*
+ * Eden Childcare Group colour system.
+ *
+ * The client-approved gold, brown and green remain the brand foundation.
+ * Green carries actions and emphasis; gold is reserved for small accents;
+ * established neutral tones carry all interface text and quiet surfaces.
+ * Legacy variable names remain mapped for existing components.
+ */
+
+:root {
+  /* Client-approved brand source of truth */
+  --eden-gold: #E7B274;
+  --eden-brown: #7B5636;
+  --eden-green: #405D25;
+
+  /* Established neutral tones — all interface text resolves here, never brown */
+  --ink: #2B2A26;
+  --ink-soft: #6B6661;
+  --surface: #FFFFFF;
+  --surface-warm: #FAF6EC;
+  --line-soft: #D7C8AD;
+  --radius-card: 1.75rem;
+
+  /* Brand green primary (legacy name: mauve) */
+  --mauve: var(--eden-green);
+  --mauve-light: #6F8A44;
+  --mauve-dark: #2F451B;
+  --mauve-soft: #EEF4E7;
+
+  /* Quiet page and section surfaces (legacy name: ivory) */
+  --ivory: var(--surface);
+  --ivory-warm: var(--surface-warm);
+
+  /* Gold remains an accent; legacy surfaces now resolve to quiet neutrals */
+  --stone: #FFF8EC;
+  --stone-border: var(--line-soft);
+  --stone-light: var(--surface-warm);
+
+  /* Neutral type hierarchy */
+  --charcoal: var(--ink);
+  --charcoal-light: var(--ink-soft);
+  --text-muted: var(--ink-soft);
+
+  /* Card hierarchy */
+  --card-bg: var(--surface);
+  --card-border: var(--line-soft);
+
+  /* Semantic aliases (preferred for new code) */
+  --sage: var(--mauve);
+  --sage-light: var(--mauve-light);
+  --sage-dark: var(--mauve-dark);
+  --sage-soft: var(--mauve-soft);
+  --eden: var(--mauve);
+  --clay: var(--eden-brown);
+  --clay-soft: var(--mauve-soft);
+}
+
+@theme inline {
+  --color-mauve: var(--mauve);
+  --color-mauve-light: var(--mauve-light);
+  --color-mauve-dark: var(--mauve-dark);
+  --color-mauve-soft: var(--mauve-soft);
+  --color-ivory: var(--ivory);
+  --color-ivory-warm: var(--ivory-warm);
+  --color-stone: var(--stone);
+  --color-stone-border: var(--stone-border);
+  --color-stone-light: var(--stone-light);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-light: var(--charcoal-light);
+  --color-text-muted: var(--text-muted);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-surface: var(--surface);
+  --color-surface-warm: var(--surface-warm);
+  --color-line-soft: var(--line-soft);
+
+  /* Semantic aliases — same colours, friendlier names */
+  --color-eden-gold: var(--eden-gold);
+  --color-eden-brown: var(--eden-brown);
+  --color-eden-green: var(--eden-green);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-sage-dark: var(--sage-dark);
+  --color-sage-soft: var(--sage-soft);
+  --color-eden: var(--eden);
+  --color-clay: var(--clay);
+  --color-clay-soft: var(--clay-soft);
+
+  /* Legacy gold/black aliases — map to the supplied Eden palette */
+  --color-gold: var(--eden-gold);
+  --color-gold-light: #F2CCA0;
+  --color-gold-dark: var(--eden-brown);
+  --color-black: var(--charcoal);
+  --color-white: var(--ivory);
+  --color-white-muted: var(--text-muted);
+
+  --font-sans: var(--font-fraunces);
+  --font-body: var(--font-outfit);
+}
+
+body {
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-body, 'Outfit', sans-serif);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main :where(p, li, blockquote, address, dd):not([class*="uppercase"]),
+footer :where(p, a):not([class*="uppercase"]):not(.fine-print) {
+  font-size: max(1rem, 1em);
+  line-height: 1.65;
+}
+
+:where(input, select, textarea) {
+  font-size: 1rem;
+}
+
+:where(article, figure, aside)[class*="border"] {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.fine-print {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans, 'Fraunces', serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--mauve);
+  color: var(--ivory);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--eden-green);
+  outline-offset: 3px;
+}
+
+.mauve-underline,
+.sage-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.mauve-underline::after,
+.sage-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--mauve);
+}
+
+/* legacy alias from divine template */
+.gold-underline { position: relative; display: inline-block; }
+.gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--mauve);
+}
+
+.service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(64, 93, 37, 0.14);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+
+.script {
+  font-family: var(--font-sans, 'Fraunces', serif);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.eden-map {
+  height: 520px;
+  width: 100%;
+  z-index: 0;
+}
+
+.eden-map .leaflet-control-zoom a {
+  color: var(--eden-green);
+  border-color: rgba(231, 178, 116, 0.45);
+}
+
+.eden-map .leaflet-control-attribution {
+  font-size: 9px;
+}
+
+.eden-map .leaflet-popup-content a.eden-map-popup-button {
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.eden-map .leaflet-popup-content a.eden-map-popup-button:hover {
+  color: var(--ivory);
+  background: var(--mauve-dark);
+}
+
+.eden-map .leaflet-popup-content a.eden-map-popup-button:focus-visible {
+  outline: 2px solid var(--eden-gold);
+  outline-offset: 2px;
+}
+
+.eden-map-marker-wrap {
+  background: transparent;
+  border: 0;
+}
+
+.eden-map-marker {
+  display: flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  border-radius: 999px 999px 999px 0;
+  background: var(--eden-green);
+  color: #fff;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  transform: rotate(-45deg);
+  box-shadow: 0 5px 14px rgba(43, 63, 24, 0.3);
+}
+
+.eden-map-marker > span {
+  transform: rotate(45deg);
+}
+
+.eden-map-marker.is-selected {
+  background: var(--eden-brown);
+  box-shadow: 0 0 0 5px rgba(231, 178, 116, 0.32), 0 5px 14px rgba(43, 63, 24, 0.3);
+}
+
+@media (max-width: 640px) {
+  .eden-map {
+    height: 360px;
+  }
+}

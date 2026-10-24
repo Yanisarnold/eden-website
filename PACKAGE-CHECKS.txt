@@ -1,0 +1,12 @@
+Eden website source package - 16 September 2026
+
+Installed dependencies from the included lockfile using npm ci.
+Ran npm run lint: passed.
+Ran npm run build: passed; generated 20 static pages.
+Ran these checks in the handover folder without .env.local.
+Scanned included source/assets for common secret markers: no matches.
+No symbolic links in the supplied source/assets.
+
+Excluded dependencies and generated build output from the ZIP.
+These checks verify installation, linting and compilation, not live
+enquiry delivery, current hosting state or a security audit.
